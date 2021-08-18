@@ -36,7 +36,12 @@
                                 <label for="subdomain" class="col-form-label">Subdomain</label>
                             </div>
                             <div class="col-8">
-                                <input type="text" id="subdomain" class="form-control" aria-describedby="subdomain" name="subdomain" value="{{ old('subdomain') }}">
+                                <input type="text" id="subdomain" class="form-control @error('cek') is-invalid @enderror" aria-describedby="subdomain" name="cek" value="{{ old('subdomain') }}">
+                                @error('cek')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="col-2">
                                 <label for="label" class="form-control bg-light">.mysch.web.id</label>

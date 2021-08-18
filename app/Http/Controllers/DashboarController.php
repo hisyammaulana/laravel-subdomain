@@ -64,11 +64,11 @@ class DashboarController extends Controller
     public function cek(Request $request)
     {
         $customAttributes = [
-            'subdomain' => 'Subdomain',
+            'cek' => 'Subdomain',
         ];
 
         $rules = [
-            'subdomain' => 'required',
+            'cek' => 'required',
         ];
 
         $messages = [
@@ -78,17 +78,15 @@ class DashboarController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages, $customAttributes);
 
         if ($validator->fails()) {
-            return redirect('tambah-sub')
-                        ->withErrors($validator)
-                        ->withInput();
+            return back()->withErrors($validator)->withInput();
         }
 
-        $subdomain = User::where('subdomain', $request->subdomain)->first();
+        $subdomain = User::where('subdomain', $request->cek)->first();
 
         if ($subdomain == null) {
-            return back()->with(['success' => ''.$request->subdomain.'.mysch.web.id tersedia!']);
+            return back()->with(['success' => ''.$request->cek.'.mysch.web.id tersedia!']);
         }
 
-        return back()->with(['error' => ''.$request->subdomain.'.mysch.web.id sudah ada!']);
+        return back()->with(['error' => ''.$request->cek.'.mysch.web.id sudah ada!']);
     }
 }
