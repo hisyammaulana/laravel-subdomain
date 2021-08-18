@@ -18,6 +18,10 @@ class SubdomainController extends Controller
     {
         $user = User::where('subdomain', $this->subdomain)->first();
 
+        if ($user == null) {
+            return view('404');
+        }
+
         return view('subdomain')->with('user', $user);
     }
 }

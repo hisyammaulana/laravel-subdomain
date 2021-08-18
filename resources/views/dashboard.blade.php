@@ -64,6 +64,7 @@
                     <th scope="col">Subdomain</th>
                     <th scope="col">Nama</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -75,10 +76,11 @@
                 @php($no = 1)
                 @foreach ($data as $sub)
                 <tr class="text-center">
-                    <th>{{ $no++ }}</th>
-                    <th>{{ $sub->subdomain }}</th>
-                    <th>{{ $sub->name }}</th>
-                    <th>{{ $sub->email }}</th>
+                    <td>{{ $no++ }}</td>
+                    <td>{{ $sub->subdomain }}</td>
+                    <td>{{ $sub->name }}</td>
+                    <td>{{ $sub->email }}</td>
+                    <td><a href="http://{{ $sub->subdomain }}.mysch.web.id" target="_blank">Buka Subdomain</a></td>
                 </tr>
                 @endforeach
                 @endif

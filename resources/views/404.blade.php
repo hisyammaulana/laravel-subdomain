@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <title>{{ $user->name }}</title>
+    <title>404 - Subdomain</title>
 </head>
 
 <body class="d-flex h-100 text-center text-white bg-dark">
     <div class="px-4 py-5 my-5 text-center">
         <img class="d-block mx-auto mb-4" src="https://res.cloudinary.com/dbipf0ewl/image/upload/v1629310738/bumitekno_jcgog2.png">
-        <h1 class="display-5 fw-bold">Hallo, {{ $user->name }}</h1>
+        <h1 class="display-5 fw-bold">Subdomain tidak ditemukan.</h1>
         <div class="col-lg-6 mx-auto">
             <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
         </div>
