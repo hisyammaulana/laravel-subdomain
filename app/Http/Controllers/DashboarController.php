@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use App\User;
 
 class DashboarController extends Controller
@@ -47,15 +48,15 @@ class DashboarController extends Controller
 
         if ($validator->fails()) {
             return redirect('tambah-sub')
-                        ->withErrors($validator)
-                        ->withInput();
+                ->withErrors($validator)
+                ->withInput();
         }
 
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'subdomain' => $request->subdomain,
+            'subdomain' => Str::of(Str::lower($request->subdomain))->trim(),
         ]);
 
         return back()->with(['success' => 'Subdomain berhasil ditambah!']);
@@ -84,9 +85,9 @@ class DashboarController extends Controller
         $subdomain = User::where('subdomain', $request->cek)->first();
 
         if ($subdomain == null) {
-            return back()->with(['success' => ''.$request->cek.'.mysch.web.id tersedia!']);
+            return back()->with(['success' => '' . $request->cek . '.mysch.web.id tersedia!']);
         }
 
-        return back()->with(['error' => ''.$request->cek.'.mysch.web.id sudah ada!']);
+        return back()->with(['error' => '' . $request->cek . '.mysch.web.id sudah ada!']);
     }
 }

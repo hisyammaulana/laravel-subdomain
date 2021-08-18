@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\DashboarController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [DashboarController::class, 'index']);
-Route::get('/tambah-sub', [DashboarController::class, 'create'])->name('tambah-sub');
-Route::post('/tambah/subdomain', [DashboarController::class, 'store'])->name('store');
-Route::post('/cari/subdomain', [DashboarController::class, 'cek'])->name('cek');
+Route::domain('{subdomain}.'. env('SESSION_DOMAIN'))->group(function(){
+    Route::get('/', 'SubdomainController@subdomain')->name('subdomain');
+});
+
+Route::get('/', 'DashboarController@index')->name('index');
+Route::get('/tambah-sub', 'DashboarController@create')->name('tambah-sub');
+Route::post('/tambah/subdomain', 'DashboarController@store')->name('store');
+Route::post('/cari/subdomain', 'DashboarController@cek')->name('cek');

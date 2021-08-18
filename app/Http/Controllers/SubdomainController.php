@@ -7,8 +7,17 @@ use App\User;
 
 class SubdomainController extends Controller
 {
-    public function subdomain(Request $request)
-    {
+    private $subdomain;
 
+    public function __construct(Request $request) 
+    {
+        $this->subdomain = $request->subdomain;
+    }
+
+    public function subdomain()
+    {
+        $user = User::where('subdomain', $this->subdomain)->first();
+
+        return view('subdomain')->with('user', $user);
     }
 }
