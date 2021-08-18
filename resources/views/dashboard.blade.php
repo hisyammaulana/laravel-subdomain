@@ -11,25 +11,40 @@
 
 <body>
     <div class="container">
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-dismissible mt-5" role="alert">
+            <strong>{{ $message }}</strong> Silahkan daftarkan subdomain kamu..
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+        @if ($message = Session::get('error'))
+        <div class="alert alert-danger alert-dismissible mt-5" role="alert">
+            <strong>{{ $message }}</strong> Silahkan cari subdomain lagi.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
         <div class="card mt-5 text-center">
             <div class="card-header">
                 Cek subdomain kamu disini
             </div>
             <div class="card-body">
                 <div class="container overflow-hidden">
-                    <div class="row">
-                        <div class="col-2">
-                            <label for="inputPassword6" class="col-form-label">Subdomain</label>
+                    <form action="{{ route('cek') }}" method="post">
+                        {{ csrf_field() }}
+                        <div class="row">
+                            <div class="col-2">
+                                <label for="subdomain" class="col-form-label">Subdomain</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="text" id="subdomain" class="form-control" aria-describedby="subdomain" name="subdomain" value="{{ old('subdomain') }}">
+                            </div>
+                            <div class="col-2">
+                                <label for="label" class="form-control bg-light">.mysch.web.id</label>
+                            </div>
                         </div>
-                        <div class="col-8">
-                            <input type="text" id="subdomain" class="form-control" aria-describedby="subdomain">
-                        </div>
-                        <div class="col-2">
-                            <label for="inputPassword6" class="form-control bg-light">.mysch.web.id</label>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-primary mt-3">Cari</a>
-                    <a href="{{ route('tambah-sub') }}" class="btn btn-success mt-3">Tambah Subdomain</a>
+                        <button type="submit" class="btn btn-primary mt-3">Cek</button>
+                        <a href="{{ route('tambah-sub') }}" class="btn btn-success mt-3">Tambah Subdomain</a>
+                    </form>
                 </div>
             </div>
         </div>
@@ -47,24 +62,21 @@
                 </tr>
             </thead>
             <tbody>
+                @if(count($data) === 0)
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+                    <th colspan="4" class="text-center">Tidak Ada Data.</th>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
+                @else
+                @php($no = 1)
+                @foreach ($data as $sub)
+                <tr class="text-center">
+                    <th>{{ $no++ }}</th>
+                    <th>{{ $sub->subdomain }}</th>
+                    <th>{{ $sub->name }}</th>
+                    <th>{{ $sub->email }}</th>
                 </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry the Bird</td>
-                    <td>The Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                @endforeach
+                @endif
             </tbody>
         </table>
     </div>

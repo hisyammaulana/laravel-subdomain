@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboarController::class, 'index']);
 Route::get('/tambah-sub', [DashboarController::class, 'create'])->name('tambah-sub');
+Route::post('/tambah/subdomain', [DashboarController::class, 'store'])->name('store');
+Route::post('/cari/subdomain', [DashboarController::class, 'cek'])->name('cek');

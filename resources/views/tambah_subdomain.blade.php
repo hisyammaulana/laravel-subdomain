@@ -11,6 +11,12 @@
 
 <body>
     <div class="container">
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-dismissible mt-5" role="alert">
+            <strong>Selamat!</strong> Subdomain berhasil ditambahkan.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
         <div class="card mt-5">
             <div class="card-header">
                 Tambah Subdomain Kamu
@@ -18,31 +24,52 @@
             <div class="card-body">
                 <div class="container overflow-hidden">
                     <div class="row">
-                        <form>
+                        <form action="{{ route('store') }}" method="POST">
+                            {{ csrf_field() }}
                             <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Subdomain</label>
+                                <label for="subdomain" class="form-label">Subdomain</label>
                                 <div class="row g-3 align-items-center">
                                     <div class="col-10">
-                                        <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+                                        <input type="text" id="subdomain" name="subdomain" class="form-control @error('subdomain') is-invalid @enderror" aria-describedby="subdomain" value="{{ old('subdomain') }}">
+                                        @error('subdomain')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                     <div class="col-2">
-                                        <span id="passwordHelpInline" class="form-text">
+                                        <span id="label" class="form-text">
                                             .mysch.web.id
                                         </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="exampleInputPassword1">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}">
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Nama Lengkap</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1">
+                                <label for="name" class="form-label">Nama Lengkap</label>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name">
+                                @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password">
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-success">Tambah Data</button>
