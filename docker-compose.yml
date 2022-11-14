@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  lara-domain:
+    container_name: lara-domain
+    env_file:
+      - .env
+    build: .
+    command: php artisan serve --host=0.0.0.0
+    ports:
+      - 8002:8000
+    networks:
+      - lara_domain
+networks:
+  lara_domain:
+    name: lara_domain
